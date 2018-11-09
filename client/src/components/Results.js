@@ -25,8 +25,18 @@ const Results = (props) => {
                 <tbody>
                     <tr>
                         {props.queryResults.map((result,i)=> {
-                            return (<td key={i}>{result}</td>)
+                            if(i<3){
+                                return (<td key={i}>{result}</td>)
+
+                            }else{
+                                
+                                return (<td key={i}>${parseInt(result).toFixed(2)}</td>)
+                            }
+                            
                         })}
+                        {props.queryResults[2] > 0 && <td><a class="waves-effect waves-light btn-large deep-orange accent-1">Hold</a></td>}
+                        
+                        
                     </tr>
                 </tbody>
 
