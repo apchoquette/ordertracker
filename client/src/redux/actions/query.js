@@ -5,7 +5,7 @@ export const fetchQuery = (params) => async dispatch => {
     dispatch({type: 'FETCH_QUERY', payload: res.data})
 }
 
-export const fetchItemCodes = (params) => async dispatch => {
-    const res = await axios.get(`/api/query/itemCodes/list`)
+export const fetchItemCodes = (input) => async dispatch => {
+    const res = await axios.get(`/api/query/itemCodes/${input}`)
     dispatch({type: 'FETCH_ITEM_CODES', payload: res.data})
 }

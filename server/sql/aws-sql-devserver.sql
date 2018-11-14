@@ -1,0 +1,5 @@
+
+USE testDB;
+
+SELECT * FROM CI_ITEM;
+

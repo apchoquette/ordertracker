@@ -49,7 +49,7 @@ module.exports = (app) => {
 }
        
     })
-    app.get('/api/query/itemCodes/list', (req,res) => {
+    app.get('/api/query/itemCodes/:input', (req,res) => {
         const Connection = require('tedious').Connection;
         const Request = require('tedious').Request;
         const keys = require('../config/keys');
@@ -59,7 +59,8 @@ module.exports = (app) => {
         connection.on('connect', (err) => {
             if(!err){
                 console.log(`Connection to SQL Server (${keys.sqlServer.server}) successful.`)
-                executeStatement();
+
+                req.params.input.length > 1 && req.params.input.length%2 === 0 && executeStatement(req.params.input);
             }else{
             console.log(err)
             }       
@@ -73,9 +74,9 @@ module.exports = (app) => {
     
         
 
-    const executeStatement = () => {
+    const executeStatement = (input) => {
         let results = [];
-        const query = `select CI_Item.ItemCode from CI_Item`;
+        const query = `select CI_Item.ItemCode from CI_Item WHERE CI_Item.ItemCode LIKE '${input}%'`;
         let request = new Request(query, (err,rowCount) => {
             if (err) {
                 console.log(err);

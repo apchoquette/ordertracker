@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as queryActions from '../redux/actions/query';
-import { AutoComplete } from 'react-materialize';
+import  AutoComplete  from 'react-autocomplete'
+
 
 class SearchBar extends Component {
     constructor(){
         super();
-        this.state ={
+        this.state = {
             query: ''
 
         }
     }
 
-    componentWillMount() {
-        this.props.fetchItemCodes();
-    }
+    
 
     changeHandler(e){
         this.setState({query: e.target.value})
-        
+        this.props.fetchItemCodes(e.target.value)
         
     }
 
@@ -26,6 +25,8 @@ class SearchBar extends Component {
         e.preventDefault();
         this.props.fetchQuery(this.state.query);
     }
+
+  
 
     render(props){
 
@@ -37,7 +38,8 @@ class SearchBar extends Component {
             boxShadow: "0px 3px 5px lightgray",
             position: "relative",
             top: "25vh",
-            borderRadius: "3px"
+            borderRadius: "3px",
+            padding: "5px"
             
         }
 
@@ -51,15 +53,22 @@ class SearchBar extends Component {
                     <form className="col s12" onSubmit={(e)=>this.submitHandler(e)}>
                         <div className="row" style={rowStyle}>
                             <div className="input-field col s12">
-                                <AutoComplete 
-                                onChange={(e)=>this.changeHandler(e)} 
-                                value={this.state.query}
-                                data={this.state.queryResults}
-                                
-                                /> 
-                                {/* <textarea onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-textarea"></textarea> */}
-                                <button className="btn waves-effect waves-light right" type="submit" name="action">Submit
-                                    
+                                {
+                                this.props.itemCodes ? <AutoComplete
+                                    getItemValue={(item) => item} 
+                                    items={this.props.itemCodes}
+                                    renderItem={(item, isHighlighted) =>
+                                        <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                                        {item}
+                                        </div>
+                                    }
+                                    value={this.state.query}
+                                    onChange={(e)=>this.changeHandler(e)}
+                                    onSelect={(val) => this.state.query = val}
+                                    /> 
+                                : <p>Loading...</p>}
+                                {/* <input onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-input"></input> */}
+                                <button className="btn waves-effect waves-light right" type="submit" name="action">Submit  
                                 </button>
                             </div>
                         </div>
