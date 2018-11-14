@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as queryActions from '../redux/actions/query';
+import { AutoComplete } from 'react-materialize';
 
 class SearchBar extends Component {
     constructor(){
@@ -11,8 +12,13 @@ class SearchBar extends Component {
         }
     }
 
+    componentWillMount() {
+        this.props.fetchItemCodes();
+    }
+
     changeHandler(e){
         this.setState({query: e.target.value})
+        
         
     }
 
@@ -45,7 +51,13 @@ class SearchBar extends Component {
                     <form className="col s12" onSubmit={(e)=>this.submitHandler(e)}>
                         <div className="row" style={rowStyle}>
                             <div className="input-field col s12">
-                                <textarea onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-textarea"></textarea>
+                                <AutoComplete 
+                                onChange={(e)=>this.changeHandler(e)} 
+                                value={this.state.query}
+                                data={this.state.queryResults}
+                                
+                                /> 
+                                {/* <textarea onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-textarea"></textarea> */}
                                 <button className="btn waves-effect waves-light right" type="submit" name="action">Submit
                                     
                                 </button>
@@ -61,7 +73,8 @@ class SearchBar extends Component {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        queryResults: state.queryResults
+        queryResults: state.queryResults,
+        itemCodes: state.itemCodes
     }
     
 }

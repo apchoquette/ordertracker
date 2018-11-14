@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const Results = (props) => {
     const containerStyle = {
         width: "50%",
-        boxShadow: "0px 3px 5px lightgray",
+        boxShadow: "1px 3px 5px lightgray",
         position: 'relative',
         top: '25vh',
         borderRadius: "3px"
@@ -37,10 +37,13 @@ const Results = (props) => {
                         {props.queryResults[2] > 0 && <td><a class="waves-effect waves-light btn-large deep-orange accent-1">Hold</a></td>}
                         
                         
+                        
                     </tr>
+                    
                 </tbody>
 
             </table>
+            {!props.queryResults[1] && <div className="container"><h5 className="center-align"><i>Enter a search...</i></h5></div> }
         </div>
     )
 }

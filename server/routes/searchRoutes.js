@@ -35,11 +35,70 @@ module.exports = (app) => {
         request.on('row', function(columns) {
 
             let resultsArr = []
+            
             columns.forEach(function(column) {
                 resultsArr.push(column.value);
                 });
             res.send(resultsArr);
         });
+              
+    connection.execSql(request);
+            
+                
+    
+}
+       
+    })
+    app.get('/api/query/itemCodes/list', (req,res) => {
+        const Connection = require('tedious').Connection;
+        const Request = require('tedious').Request;
+        const keys = require('../config/keys');
+
+        const connection = new Connection(keys.sqlServer);
+
+        connection.on('connect', (err) => {
+            if(!err){
+                console.log(`Connection to SQL Server (${keys.sqlServer.server}) successful.`)
+                executeStatement();
+            }else{
+            console.log(err)
+            }       
+        })
+        
+        
+    const executionCallback = (err,results) => {
+        res.send(results);
+    }
+
+    
+        
+
+    const executeStatement = () => {
+        let results = [];
+        const query = `select CI_Item.ItemCode from CI_Item`;
+        let request = new Request(query, (err,rowCount) => {
+            if (err) {
+                console.log(err);
+            } else {        
+                console.log(rowCount + ' rows')
+                res.send(results)
+            }
+        });
+        request.on('row', function(column) {
+            
+            
+            column.forEach((rowObj) => {
+                results.push(rowObj.value)
+            })
+
+            
+
+
+            // console.log(results);
+            
+        });
+        
+        
               
     connection.execSql(request);
             
