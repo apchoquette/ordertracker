@@ -1,5 +1,5 @@
 
 USE testDB;
 
-SELECT * FROM CI_ITEM;
+SELECT * FROM CI_ITEM
 

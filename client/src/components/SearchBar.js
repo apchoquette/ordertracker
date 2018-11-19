@@ -68,7 +68,7 @@ class SearchBar extends Component {
                                     /> 
                                 : <p>Loading...</p>}
                                 {/* <input onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-input"></input> */}
-                                <button className="btn waves-effect waves-light right" type="submit" name="action">Submit  
+                                <button className="btn waves-effect indigo lighten-2 right" type="submit" name="action">Submit  
                                 </button>
                             </div>
                         </div>
