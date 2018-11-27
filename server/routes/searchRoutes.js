@@ -28,19 +28,30 @@ module.exports = (app) => {
         let request = new Request(query, (err,rowCount) => {
             if (err) {
                 console.log(err);
-            } else {        
+
+            }else if(rowCount < 1){
+                res.send([0,0,0,0,0])
+            }
+            
+            else {        
                 console.log(rowCount + ' rows');
             }
+            connection.close();
+
         });
         request.on('row', function(columns) {
 
             let resultsArr = []
+
             
-            columns.forEach(function(column) {
-                resultsArr.push(column.value);
-                });
-            res.send(resultsArr);
-        });
+                columns.forEach(function(column) {
+                    resultsArr.push(column.value)
+                })
+
+                res.send(resultsArr);
+            } 
+        );
+       
               
     connection.execSql(request);
             

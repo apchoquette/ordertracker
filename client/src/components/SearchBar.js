@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Row, Input } from 'react-materialize';
 import * as queryActions from '../redux/actions/query';
-import  AutoComplete  from 'react-autocomplete'
+
 
 
 class SearchBar extends Component {
@@ -11,11 +12,12 @@ class SearchBar extends Component {
             query: ''
 
         }
+        this.changeHandler = this.changeHandler.bind(this)
     }
 
     
 
-    changeHandler(e){
+    changeHandler(e) {
         this.setState({query: e.target.value});
         
     }
@@ -38,7 +40,8 @@ class SearchBar extends Component {
             position: "relative",
             top: "25vh",
             borderRadius: "3px",
-            padding: "5px"
+            padding: "5px",
+            backgroundColor: 'white'
             
         }
 
@@ -48,31 +51,22 @@ class SearchBar extends Component {
     
         return (
            
-                <div className="row" style={containerStyle}>
+                <Row style={containerStyle}>
                     <form className="col s12" onSubmit={(e)=>this.submitHandler(e)}>
-                        <div className="row" style={rowStyle}>
-                            <div className="input-field col s12">
-                                {
-                                this.props.itemCodes ? <AutoComplete
-                                    getItemValue={(item) => item} 
-                                    items={this.props.itemCodes}
-                                    renderItem={(item, isHighlighted) =>
-                                        <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                                        {item}
-                                        </div>
-                                    }
-                                    value={this.state.query}
-                                    onChange={(e)=>this.changeHandler(e)}
-                                    onSelect={(val) => this.state.query = val}
-                                    /> 
-                                : <p>Loading...</p>}
+                        <Row style={rowStyle}>
+                            
+                                
+                                
+                                <Input s={12} value={this.props.query} onChange={this.changeHandler} placeholder="Part Number"/>
+          
+                            
                                 {/* <input onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-input"></input> */}
                                 <button className="btn waves-effect indigo lighten-2 right" type="submit" name="action">Submit  
                                 </button>
-                            </div>
-                        </div>
+                            
+                        </Row>
                     </form>
-                </div>
+                </Row>
             
         )
     }
@@ -81,8 +75,7 @@ class SearchBar extends Component {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        queryResults: state.queryResults,
-        itemCodes: state.itemCodes
+        queryResults: state.queryResults
     }
     
 }

@@ -7,14 +7,19 @@ import InventorySearch from './components/InventorySearch';
 import OrderTracker from './components/OrderTracker';
 
 class App extends Component {
+
+  
   render() {
 
-    
+    const mainContainerStyle = {
+        height: '100vh'
+
+    }
     return (
       
         <div>
           <BrowserRouter>
-            <div className="container-fluid grey lighten-3">
+            <div className="container-fluid grey lighten-3"style={mainContainerStyle}>
             
                 <NavBar />
                 <Route path="/" exact component={Hero} />

@@ -7,34 +7,49 @@ const Results = (props) => {
         boxShadow: "1px 3px 5px lightgray",
         position: 'relative',
         top: '25vh',
-        borderRadius: "3px"
+        borderRadius: "3px",
+        backgroundColor: "white"
+        
+    }
+
+    const renderTableHeading = (props) => {
+        return(
+             
+            
+            <thead>
+                {props.queryResults[0] ?
+                <tr>
+                    <th>Item Code</th>
+                    <th>Description</th>
+                    <th>Quantity Available</th>
+                    <th>Price (Wholesale)</th>
+                    <th>Price (Retail)</th>
+                </tr> : <p></p>}
+            </thead>
+        )
         
     }
     return(
         <div className="row" style={containerStyle}>
             <table className="centered">
-                <thead>
-                    <tr>
-                        <th>Item Code</th>
-                        <th>Description</th>
-                        <th>Quantity Available</th>
-                        <th>Price (Wholesale)</th>
-                        <th>Price (Retail)</th>
-                    </tr>
-                </thead>
+                {renderTableHeading(props)}
                 <tbody>
                     <tr>
-                        {props.queryResults.map((result,i)=> {
-                            if(i<3){
-                                return (<td key={i}>{result}</td>)
-
-                            }else{
-                                
-                                return (<td key={i}>${parseInt(result).toFixed(2)}</td>)
-                            }
+                        {props.queryResults[0]!==0 && props.queryResults.map((result,i)=> {
+                            
+                           
+                                if(i<3){
+                                    return (<td key={i}>{result}</td>)
+    
+                                }else{
+                                    
+                                    return (<td key={i}>${parseInt(result).toFixed(2)}</td>)
+                                }
+                            
+                            
                             
                         })}
-                        {props.queryResults[2] > 0 && <td><a class="waves-effect waves-light btn-large deep-orange accent-1">Hold</a></td>}
+                        {props.queryResults[2] > 0 && <td><a className="waves-effect waves-light btn-large deep-orange accent-1">Hold</a></td>}
                         
                         
                         
@@ -43,7 +58,8 @@ const Results = (props) => {
                 </tbody>
 
             </table>
-            {!props.queryResults[1] && <div className="container"><h5 className="center-align"><i>Enter a search...</i></h5></div> }
+            {!props.queryResults[0] && props.queryResults[0] !== 0 && <div className="container"><h5 className="center-align"><i>Enter a search...</i></h5></div> }
+            {props.queryResults[0]===0 && <div className="container"><h5 className="center-align"><i>No results found...</i></h5></div>}
         </div>
     )
 }

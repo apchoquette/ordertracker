@@ -4,6 +4,8 @@ import Results from './Results'
 import SearchBar from './SearchBar'
 
 const InventorySearch = () => {
+
+    
     return (
         <div className="container-fluid">
             <SearchBar />
