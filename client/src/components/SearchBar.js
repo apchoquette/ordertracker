@@ -16,8 +16,7 @@ class SearchBar extends Component {
     
 
     changeHandler(e){
-        this.setState({query: e.target.value})
-        this.props.fetchItemCodes(e.target.value)
+        this.setState({query: e.target.value});
         
     }
 
