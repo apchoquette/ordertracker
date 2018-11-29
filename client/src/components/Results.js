@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Results = (props) => {
     const containerStyle = {
-        width: "50%",
+        width: "75%",
         boxShadow: "1px 3px 5px lightgray",
         position: 'relative',
         top: '25vh',
@@ -22,14 +23,21 @@ const Results = (props) => {
              
             
             <thead>
-                {props.queryResults[0] ?
-                <tr>
-                    <th>Item Code</th>
-                    <th>Description</th>
-                    <th>Quantity Available</th>
-                    <th>Price (Wholesale)</th>
-                    <th>Price (Retail)</th>
-                </tr> : <p></p>}
+                {props.queryResults.length>0 
+                ? 
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Description</th>
+                        <th>Quantity Available</th>
+                        <th>Price (Wholesale)</th>
+                        <th>Price (Retail)</th>
+                        <th>Status East</th>
+                        <th>Status West</th>
+                            </tr> 
+                            : <tr />
+
+                }
+                
             </thead>
         )
         
@@ -39,32 +47,26 @@ const Results = (props) => {
             <table className="centered">
                 {renderTableHeading(props)}
                 <tbody>
-                    <tr>
-                        {props.queryResults[0]!==0 && props.queryResults.map((result,i)=> {
-                            
-                           
-                                if(i<3){
-                                    return (<td key={i}>{result}</td>)
-    
-                                }else{
-                                    
-                                    return (<td key={i}>${parseInt(result).toFixed(2)}</td>)
-                                }
-                            
-                            
-                            
-                        })}
-                        {props.queryResults[2] > 0 && <td><a className="waves-effect waves-light btn-large deep-orange accent-1">Hold</a></td>}
-                        
-                        
-                        
-                    </tr>
                     
+                        {props.queryResults.map(({ItemCode, ItemcodeDesc, TotalQuantityOnHand, UDF_SQFT_STANDARD_PRICE, UDF_SQFT_RETAIL_PRICE,UDF_STATUSBRI,UDF_STATUSPAC} ,index)=> { return(
+                            <tr key={index}>
+                                <td><Link to={`/inventory/${ItemCode}`}>{ItemCode}</Link></td>
+                                <td>{ItemcodeDesc}</td>
+                                <td>{TotalQuantityOnHand}</td>
+                                <td>{`$${UDF_SQFT_STANDARD_PRICE.toFixed(2)}`}</td>
+                                <td>{`$${UDF_SQFT_RETAIL_PRICE.toFixed(2)}`}</td>
+                                <td>{UDF_STATUSBRI}</td>
+                                <td>{UDF_STATUSPAC}</td>
+
+                            </tr>)
+
+                        })}
+    
                 </tbody>
 
             </table>
              
-            {props.queryResults[0]===0 && <div className="container"><h5 className="center-align"><i>No results found...</i></h5></div>}
+           
         </div>
     )
 }

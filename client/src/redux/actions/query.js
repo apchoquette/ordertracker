@@ -16,5 +16,6 @@ export const fetchItemCodes = (input) => async dispatch => {
 
 export const fetchOrderStatus = (orderNo) => async dispatch => {
     const res = await axios.get(`/api/query/orderStatus/${orderNo}`)
+    console.log(res.data);
     dispatch({type: 'FETCH_QUERY', payload: res.data})
 }
