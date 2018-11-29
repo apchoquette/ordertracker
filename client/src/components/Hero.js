@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Hero = () => {
+const Hero = (props) => {
 
     const containerStyle = {
         height: "400px",
@@ -32,9 +32,9 @@ const Hero = () => {
         top: "15%"
     }
     return (
-        <div className="container" style={containerStyle}>
+        <div className="container" style={containerStyle} >
             <div className="row" style={rowStyle}>
-                <div className="col s4 center-align" style={cardStyle} >
+                <div className="col s3 center-align" style={cardStyle} onClick={()=>props.history.push('/inventory')}>
                     <div className="card hoverable" style={cardStyle2}>
                         <div className="card-content" style={cardContentStyle}>
                             
@@ -44,7 +44,7 @@ const Hero = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col s4 center-align" style={cardStyle}>
+                <div className="col s3 center-align" style={cardStyle} onClick={()=>props.history.push('/ordertracker')}>
                     <div className="card hoverable" style={cardStyle2}>
                         <div className="card-content" style={cardContentStyle}>
                             <i className="material-icons" style={iconStyle}>receipt</i>
@@ -54,11 +54,19 @@ const Hero = () => {
                     </div>
                 
                 </div>
-                <div className="col s4 center-align" style={cardStyle}>
+                <div className="col s3 center-align" style={cardStyle}>
                     <div className="card hoverable" style={cardStyle2} >
                             <div className="card-content" style={cardContentStyle}>
                                 <i className="material-icons" style={iconStyle}>help</i>
                                 <h6>Get CLP Distribution Status</h6>
+                            </div>
+                        </div>
+                </div>
+                <div className="col s3 center-align" style={cardStyle}>
+                    <div className="card hoverable" style={cardStyle2} >
+                            <div className="card-content" style={cardContentStyle}>
+                                <i className="material-icons" style={iconStyle}>camera_alt</i>
+                                <h6>Request Lot Photos</h6>
                             </div>
                         </div>
                 </div>

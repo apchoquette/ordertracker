@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 
-import Results from './Results'
-import SearchBar from './SearchBar'
+import BackButton from './BackButton';
+import Results from './Results';
+import SearchBar from './SearchBar';
 
-const InventorySearch = () => {
+const InventorySearch = (props) => {
 
-    
+
     return (
         <div className="container-fluid">
-            <SearchBar />
+            <BackButton history = {props.history}/>
+            <SearchBar placeholder="Part Number"/>
             <Results />
 
         </div>

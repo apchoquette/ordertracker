@@ -8,8 +8,13 @@ const Results = (props) => {
         position: 'relative',
         top: '25vh',
         borderRadius: "3px",
-        backgroundColor: "white"
+        backgroundColor: "white",
+        transition: ".2s ease-in"
         
+    }
+
+    const containerStyleHidden = {
+        hidden: "true"
     }
 
     const renderTableHeading = (props) => {
@@ -30,7 +35,7 @@ const Results = (props) => {
         
     }
     return(
-        <div className="row" style={containerStyle}>
+        <div className="row" style={!props.queryResults[0] && props.queryResults[0] !== 0 ? containerStyleHidden : containerStyle}>
             <table className="centered">
                 {renderTableHeading(props)}
                 <tbody>
@@ -58,7 +63,7 @@ const Results = (props) => {
                 </tbody>
 
             </table>
-            {!props.queryResults[0] && props.queryResults[0] !== 0 && <div className="container"><h5 className="center-align"><i>Enter a search...</i></h5></div> }
+             
             {props.queryResults[0]===0 && <div className="container"><h5 className="center-align"><i>No results found...</i></h5></div>}
         </div>
     )

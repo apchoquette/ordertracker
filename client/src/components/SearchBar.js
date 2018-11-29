@@ -6,19 +6,18 @@ import * as queryActions from '../redux/actions/query';
 
 
 class SearchBar extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             query: ''
+            
 
         }
         this.changeHandler = this.changeHandler.bind(this)
     }
 
-    
-
     changeHandler(e) {
-        this.setState({query: e.target.value});
+        this.setState({query: '%25'+e.target.value+'%25'});
         
     }
 
@@ -27,11 +26,17 @@ class SearchBar extends Component {
         this.props.fetchQuery(this.state.query);
     }
 
-  
+    renderInput(){
+        return (
+
+
+                <Input s={12} value={this.props.query} onChange={this.changeHandler} placeholder={this.props.placeholder}/>
+        )
+    }
 
     render(props){
 
-        console.log(this.state)
+       
         
 
         const containerStyle = {
@@ -54,12 +59,7 @@ class SearchBar extends Component {
                 <Row style={containerStyle}>
                     <form className="col s12" onSubmit={(e)=>this.submitHandler(e)}>
                         <Row style={rowStyle}>
-                            
-                                
-                                
-                                <Input s={12} value={this.props.query} onChange={this.changeHandler} placeholder="Part Number"/>
-          
-                            
+                            {this.renderInput()}               
                                 {/* <input onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-input"></input> */}
                                 <button className="btn waves-effect indigo lighten-2 right" type="submit" name="action">Submit  
                                 </button>
