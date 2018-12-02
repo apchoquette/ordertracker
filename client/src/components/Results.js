@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 
 const Results = (props) => {
     const containerStyle = {
@@ -16,6 +16,10 @@ const Results = (props) => {
 
     const containerStyleHidden = {
         hidden: "true"
+    }
+
+    const rowStyle = {
+        cursor: "pointer"
     }
 
     const renderTableHeading = (props) => {
@@ -44,17 +48,17 @@ const Results = (props) => {
     }
     return(
         <div className="row" style={!props.queryResults[0] && props.queryResults[0] !== 0 ? containerStyleHidden : containerStyle}>
-            <table className="centered">
+            <table className="centered highlight">
                 {renderTableHeading(props)}
                 <tbody>
                     
                         {props.queryResults.map(({ItemCode, ItemcodeDesc, TotalQuantityOnHand, UDF_SQFT_STANDARD_PRICE, UDF_SQFT_RETAIL_PRICE,UDF_STATUSBRI,UDF_STATUSPAC} ,index)=> { return(
-                            <tr key={index}>
-                                <td><Link to={`/inventory/${ItemCode}`}>{ItemCode}</Link></td>
+                            <tr style = {rowStyle} key={index} onClick={()=>props.history.push(`/inventory/${ItemCode}`)}>
+                                <td>{ItemCode}</td>
                                 <td>{ItemcodeDesc}</td>
                                 <td>{TotalQuantityOnHand}</td>
-                                <td>{`$${UDF_SQFT_STANDARD_PRICE.toFixed(2)}`}</td>
-                                <td>{`$${UDF_SQFT_RETAIL_PRICE.toFixed(2)}`}</td>
+                                <td>{UDF_SQFT_STANDARD_PRICE && `$${UDF_SQFT_STANDARD_PRICE.toFixed(2)}`}</td>
+                                <td>{UDF_SQFT_RETAIL_PRICE && `$${UDF_SQFT_RETAIL_PRICE.toFixed(2)}`}</td>
                                 <td>{UDF_STATUSBRI}</td>
                                 <td>{UDF_STATUSPAC}</td>
 

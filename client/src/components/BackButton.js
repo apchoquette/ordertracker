@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BackButton = ({history}) => {
+const BackButton = ({history,destination}) => {
 
     const backBtnStyle = {
         position: 'fixed',
@@ -8,8 +8,8 @@ const BackButton = ({history}) => {
         left: "60px"
     }
     return (
-        <a style={backBtnStyle} className="waves-effect blue btn" onClick={()=>history.push('/')}>
-        <i className="material-icons">arrow_back</i>Dashboard
+        <a style={backBtnStyle} className="waves-effect blue btn" onClick={destination ? ()=>history.push(`/${destination}`) : ()=>history.push('/')}>
+        <i className="material-icons">arrow_back</i>
         </a>
     )
 }

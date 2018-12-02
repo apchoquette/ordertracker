@@ -16,6 +16,10 @@ class SearchBar extends Component {
         this.changeHandler = this.changeHandler.bind(this)
     }
 
+    componentWillMount() {
+        this.props.fetchQuery(undefined);
+    }
+
     changeHandler(e) {
         this.setState({query: '%25'+e.target.value+'%25'});
         
@@ -23,7 +27,12 @@ class SearchBar extends Component {
 
     submitHandler(e){
         e.preventDefault();
-        this.props.fetchQuery(this.state.query);
+        if(this.props.purpose === 'CS'){
+            this.props.fetchQuery(this.state.query);
+        }else if(this.props.purpose === 'WH'){
+            this.props.fethWHQuery(this.state.query);
+        }
+        
     }
 
     renderInput(){
@@ -43,7 +52,7 @@ class SearchBar extends Component {
             width: "50%",
             boxShadow: "0px 3px 5px lightgray",
             position: "relative",
-            top: "25vh",
+            top: "15vh",
             borderRadius: "3px",
             padding: "5px",
             backgroundColor: 'white'

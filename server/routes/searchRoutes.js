@@ -2,6 +2,72 @@ module.exports = (app) => {
 
     //Search CI_Item Sage database by itemcode or description -- For use in Results.js component.
 
+    app.get('/api/query/item/:itemCode', (req,res) => {
+        const Connection = require('tedious').Connection;
+        const Request = require('tedious').Request;
+        const keys = require('../config/keys');
+
+        const connection = new Connection(keys.sqlServer);
+
+        connection.on('connect', (err) => {
+            if(!err){
+                console.log(`Specific Item Query to: (${keys.sqlServer.server}) `)
+                executeSpecificItemStatement(req.params.itemCode);
+            }else{
+            console.log(err)
+            }       
+        })
+
+        const executeSpecificItemStatement = (itemCode) => {
+
+            const query = 
+            `select WarehouseCode,
+                    QuantityOnHand-QuantityCommitted AS 'StockAvailable',
+                    LotSerialNo
+                    from IM_ItemCost
+                    WHERE ItemCode LIKE ${itemCode} AND
+                    LotSerialNo NOT IN ('10','20','30') AND
+                    QuantityOnHand-QuantityCommitted > 0`
+            
+    
+            
+            
+            
+            let request = new Request(query, (err,rowCount,rows) => {
+                if (err) {
+                    console.log(err);
+                }else {
+                    console.log('rows returned: ', rowCount);  
+                }
+    
+            }).on('doneInProc',(rowCount, more, rows) => {
+                //Once query runs, check if rows are returned and return an object with all data.
+                if(rowCount>0){
+                    let rowsArray = [];
+    
+                    rows.forEach(function(columns) {
+    
+                    let rowArray = new Object();
+                    columns.forEach(function(column){
+                        rowArray[column.metadata.colName] = column.value
+                    })  
+                    rowsArray.push(rowArray);
+                    })
+                        
+                        
+                    
+                    res.send(rowsArray);
+    
+                }else {
+                    res.send([]);
+                }
+                
+                    
+                });
+            connection.execSql(request);
+            }
+    })
+
     app.get('/api/query/:itemCode', (req,res) => {
         const Connection = require('tedious').Connection;
         const Request = require('tedious').Request;
@@ -103,46 +169,109 @@ module.exports = (app) => {
             }       
         })
     
-        
-
-        
-
-    const executeOrderStatusStatement = (orderNo) => {
-        
-        const query = `select SO_SalesOrderHeader.OrderType, 
-        SO_SalesOrderHeader.OrderStatus, 
-        SO_SalesOrderHeader.ShipToAddress, 
-        SO_SalesOrderHeader.ShipVia FROM SO_SalesOrderHeader where OrderNo=${orderNo}`;
-        let request = new Request(query, (err,rowCount) => {
-            if (err) {
-                console.log(err);
-
-            }else if(rowCount < 1){
-                res.send([0,0,0,0,0])
-            }
+        const executeOrderStatusStatement = (orderNo) => {
             
-            else {        
-                console.log(rowCount + ' rows');
-            }
-            connection.close();
+            const query = `select SO_SalesOrderHeader.OrderType, 
+            SO_SalesOrderHeader.OrderStatus, 
+            SO_SalesOrderHeader.ShipToAddress, 
+            SO_SalesOrderHeader.ShipVia FROM SO_SalesOrderHeader where OrderNo=${orderNo}`;
+            let request = new Request(query, (err,rowCount) => {
+                if (err) {
+                    console.log(err);
 
-        });
-        request.on('row', function(columns) {
+                }else if(rowCount < 1){
+                    res.send([0,0,0,0,0])
+                }
+                
+                else {        
+                    console.log(rowCount + ' rows');
+                }
+                connection.close();
 
-            let resultsArr = []
+            });
+            request.on('row', function(columns) {
 
-            
+                let resultsArr = [];
+
                 columns.forEach(function(column) {
-                    resultsArr.push(column.value)
+                        resultsArr.push(column.value)
                 })
 
                 res.send(resultsArr);
-            } 
-        );
-       
-              
-        connection.execSql(request);
+                } 
+            );
+        
+                
+            connection.execSql(request);
             
                 
+        };   
     
-}})})}
+    });
+});
+//find bin locations for warehouse inventory checks
+app.get('/api/query/wh-item/:itemCode', (req,res) => {
+    const Connection = require('tedious').Connection;
+    const Request = require('tedious').Request;
+    const keys = require('../config/keys');
+
+    const connection = new Connection(keys.warehouseServer);
+
+    connection.on('connect', (err) => {
+        if(!err){
+            console.log(`Specific WH Item Query to: (${keys.warehouseServer.server}) `)
+            executeSpecificWHItemStatement(req.params.itemCode);
+        }else{
+        console.log(err)
+        }       
+    })
+
+    const executeSpecificWHItemStatement = (itemCode) => {
+
+        const query = 
+        `select PRODUCT, EXTENDED, QUANTITY, PACKSIZE, UNALLOC, USER_ID, EXTENDED 
+                FROM BINLOCAT
+                WHERE PRODUCT LIKE ${itemCode}`
+        
+
+        
+        
+        
+        let request = new Request(query, (err,rowCount,rows) => {
+            if (err) {
+                console.log(err);
+            }else {
+                console.log('rows returned: ', rowCount);  
+            }
+
+        }).on('doneInProc',(rowCount, more, rows) => {
+            //Once query runs, check if rows are returned and return an object with all data.
+            if(rowCount>0){
+                let rowsArray = [];
+
+                rows.forEach(function(columns) {
+
+                let rowArray = new Object();
+                columns.forEach(function(column){
+                    rowArray[column.metadata.colName] = column.value
+                })  
+                rowsArray.push(rowArray);
+                })
+                    
+                    
+                
+                res.send(rowsArray);
+
+            }else {
+                res.send([]);
+            }
+            
+                
+            });
+        connection.execSql(request);
+        }
+})
+
+
+
+};
