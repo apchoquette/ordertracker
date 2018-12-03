@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
 class NavBar extends Component {
     constructor(){
@@ -8,9 +9,7 @@ class NavBar extends Component {
         }
     }
 
-    handleLogin() {
-        console.log('Log in pressed')
-    }
+   
 
     render() {
         return (
@@ -18,10 +17,13 @@ class NavBar extends Component {
                 <div className="nav-wrapper red lighten-2">
                     <a href="/" className="brand-logo">ToolBox</a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
-                        <li><a href="/inventory">Stock Check</a></li>
-                        <li><a href="/ordertracker">Order Tracker</a></li>
+                    
+                        {this.props.user && <li><a href="/inventory">Stock Check</a></li>}
+                        {this.props.user && <li><a href="/ordertracker">Order Tracker</a></li>}
+                        {this.props.user && <li><a className="disabled" href="/clp">CLP</a></li>}
+                        {this.props.user && <li><a href="/lotphotos">Lot Photos</a></li>}
                         <li><a href="/help">Help</a></li>
-                        <li><a className="waves-effect waves-light btn" onClick={this.handleLogin}>Log in!</a></li>
+                        {this.props.user && <li><a className="waves-effect waves-light btn" href="http://localhost:4000/api/logout">Log out</a></li>}
                     </ul>
                 </div>
             </nav>
@@ -29,4 +31,10 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(NavBar);

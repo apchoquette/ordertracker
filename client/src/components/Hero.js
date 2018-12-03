@@ -6,7 +6,7 @@ const Hero = (props) => {
         height: "400px",
         padding: "20px",
         position: "relative",
-        top: "25vh"
+        top: "15%"
     }
 
     const rowStyle = {
