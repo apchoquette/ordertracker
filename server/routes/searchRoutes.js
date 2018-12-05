@@ -229,9 +229,11 @@ app.get('/api/query/wh-item/:itemCode', (req,res) => {
     const executeSpecificWHItemStatement = (itemCode) => {
 
         const query = 
-        `select PRODUCT, EXTENDED, QUANTITY, PACKSIZE, UNALLOC, USER_ID, EXTENDED 
+        `select PRODUCT, BINLABEL, EXTENDED, QUANTITY, PACKSIZE, FROM_BIN, USER_ID
                 FROM BINLOCAT
-                WHERE PRODUCT LIKE ${itemCode}`
+                WHERE PRODUCT LIKE ${itemCode} AND
+                BINLABEL NOT LIKE '#%'
+                ORDER BY BINLABEL`
         
 
         

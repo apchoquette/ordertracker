@@ -1,10 +1,14 @@
 import React from 'react';
 import SearchBar from './SearchBar';
+import BackButton from './BackButton';
+import Results from './Results';
 
 const WHSearch = (props) => {
     return (
         <div>
-            <SearchBar placeholder="Part Number" purpose="WH"/>
+            <BackButton history = {props.history}/>
+            <SearchBar placeholder="Part Number" purpose="CS"/>
+            <Results history={props.history}/>
         </div>
     )
 }

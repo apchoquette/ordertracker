@@ -7,7 +7,7 @@ export const fetchQuery = ( params ) => async dispatch => {
 
 export const fetchProductDetails = ( params ) => async dispatch => {
     const res = await axios.get(`/api/query/item/${params}`)
-    dispatch( { type: 'FETCH_QUERY', payload: res.data } )
+    dispatch( { type: 'FETCH_DETAIL_QUERY', payload: res.data } )
 }
 
 export const fetchItemCodes = ( input ) => async dispatch => {
@@ -23,6 +23,6 @@ export const fetchOrderStatus = ( orderNo ) => async dispatch => {
 
 export const fetchWHProductDetails = ( params ) => async dispatch => {
     const res = await axios.get(`/api/query/wh-item/${params}`)
-    dispatch( { type: 'FETCH_WH_QUERY', payload: res.data } )
+    dispatch( { type: 'FETCH_WH_DETAIL_QUERY', payload: res.data } )
 }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import * as authActions from '../redux/actions/auth'
 
 class Login extends Component {
@@ -37,10 +36,10 @@ class Login extends Component {
     render() {
 
         const containerStyle = {
-            width: "25%",
+            width: "350px",
             boxShadow: "0px 3px 5px lightgray",
             position: "relative",
-            top: "30vh",
+            top: "10vw",
             borderRadius: "3px",
             padding: "5px",
             backgroundColor: 'white'
@@ -62,7 +61,7 @@ class Login extends Component {
                         <input type="password" onChange={(e) => this.setState({password: e.target.value})} value={this.state.password} name="password"/>
                     </div>
                     <div className="row center-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Log In
+                        <button className="btn waves-effect waves-light" type="submit" name="action">Log In
                             
                         </button>
                     </div>

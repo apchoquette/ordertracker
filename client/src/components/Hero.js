@@ -1,4 +1,5 @@
 import React from 'react';
+import FeatureCard from './FeatureCard';
 
 const Hero = (props) => {
 
@@ -13,63 +14,43 @@ const Hero = (props) => {
         height: "300px"
     }
 
-    const cardStyle = {
-        height: "100%",
-        cursor: "pointer"
-    }
-
-    const cardStyle2 = {
-        height: "100%",
-        cursor: "pointer"
-    }
-
-    const iconStyle = {
-        fontSize: "100px"
-    }
-
-    const cardContentStyle = {
-        position: "relative",
-        top: "15%"
-    }
+    
     return (
         <div className="container" style={containerStyle} >
             <div className="row" style={rowStyle}>
-                <div className="col s3 center-align" style={cardStyle} onClick={()=>props.history.push('/inventory')}>
-                    <div className="card hoverable" style={cardStyle2}>
-                        <div className="card-content" style={cardContentStyle}>
-                            
-                            <i className="material-icons" style={iconStyle}>search</i>
-                            <h6>Check Stock</h6>
+                <FeatureCard 
+                    url="/inventory"
+                    icon="search"
+                    title="Check Stock"
+                    history={props.history}
+                />
+                <FeatureCard 
+                    url="/ordertracker"
+                    icon="receipt"
+                    title="Get Order Updates"
+                    history={props.history}
+                />
+                <FeatureCard 
+                    url="/clp"
+                    icon="help"
+                    title="Get CLP Distribution Status"
+                    history={props.history}
+                />
+                <FeatureCard 
+                    url="/lotphotos"
+                    icon="camera_alt"
+                    title="Request Lot Photos"
+                    history={props.history}
+                />
 
-                        </div>
-                    </div>
-                </div>
-                <div className="col s3 center-align" style={cardStyle} onClick={()=>props.history.push('/ordertracker')}>
-                    <div className="card hoverable" style={cardStyle2}>
-                        <div className="card-content" style={cardContentStyle}>
-                            <i className="material-icons" style={iconStyle}>receipt</i>
-                            <h6>Get Order Updates</h6>
-
-                        </div>
-                    </div>
-                
-                </div>
-                <div className="col s3 center-align" style={cardStyle}>
-                    <div className="card hoverable" style={cardStyle2} >
-                            <div className="card-content" style={cardContentStyle}>
-                                <i className="material-icons" style={iconStyle}>help</i>
-                                <h6>Get CLP Distribution Status</h6>
-                            </div>
-                        </div>
-                </div>
-                <div className="col s3 center-align" style={cardStyle}>
-                    <div className="card hoverable" style={cardStyle2} >
-                            <div className="card-content" style={cardContentStyle}>
-                                <i className="material-icons" style={iconStyle}>camera_alt</i>
-                                <h6>Request Lot Photos</h6>
-                            </div>
-                        </div>
-                </div>
+            </div>
+            <div className="row" style={rowStyle}>
+                <FeatureCard 
+                    url="/locate"
+                    icon="add_location"
+                    title="Locate Material"
+                    history={props.history}
+                />
             </div>
         </div>
     )

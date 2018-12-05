@@ -8,13 +8,12 @@ import NavBar from './components/NavBar';
 import InventorySearch from './components/InventorySearch';
 import OrderTracker from './components/OrderTracker';
 import ProductDetailPage from './components/ProductDetailPage';
+import WHSearch from './components/WHSearch';
 
 class App extends Component {
 
   
   render() {
-
-    console.log('App top level props: ',this.props)
 
     const mainContainerStyle = {
         height: '100%'
@@ -35,6 +34,8 @@ class App extends Component {
                 <Route path="/inventory" component={InventorySearch} exact/>
                 <Route path="/ordertracker" component={OrderTracker} />
                 <Route path="/inventory/:itemCode" component={ProductDetailPage} exact/>
+                <Route path="/inventory-wh/:itemCode" component={ProductDetailPage} exact/>
+                <Route path="/locate" component={WHSearch} />
             </div>
           </BrowserRouter>
         </div>

@@ -4,11 +4,11 @@ const BackButton = ({history,destination}) => {
 
     const backBtnStyle = {
         position: 'fixed',
-        top: "85px",
-        left: "60px"
+        top: "200px",
+        left: "6vw"
     }
     return (
-        <a style={backBtnStyle} className="waves-effect blue btn" onClick={destination ? ()=>history.push(`/${destination}`) : ()=>history.push('/')}>
+        <a style={backBtnStyle} className="waves-effect blue btn" onClick={()=>history.goBack()}>
         <i className="material-icons">arrow_back</i>
         </a>
     )

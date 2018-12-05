@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Input } from 'react-materialize';
+import { Row, Input, Button } from 'react-materialize';
 import * as queryActions from '../redux/actions/query';
 
 
@@ -16,9 +16,10 @@ class SearchBar extends Component {
         this.changeHandler = this.changeHandler.bind(this)
     }
 
-    componentWillMount() {
-        this.props.fetchQuery(undefined);
+    componentWillMount(){
+        
     }
+
 
     changeHandler(e) {
         this.setState({query: '%25'+e.target.value+'%25'});
@@ -27,19 +28,31 @@ class SearchBar extends Component {
 
     submitHandler(e){
         e.preventDefault();
-        if(this.props.purpose === 'CS'){
-            this.props.fetchQuery(this.state.query);
-        }else if(this.props.purpose === 'WH'){
-            this.props.fethWHQuery(this.state.query);
-        }
+        
+        this.props.fetchQuery(this.state.query);
+        
         
     }
 
     renderInput(){
+        const rowStyle = {
+            marginBottom: "0px",
+            display: "flex",
+            alignContent: "center"
+        }
+
+        const inputStyle = {
+            padding: "0px"
+        }
+
+        
         return (
 
-
-                <Input s={12} value={this.props.query} onChange={this.changeHandler} placeholder={this.props.placeholder}/>
+            <div className="row" style={rowStyle}>
+                <input className="input-field col s12" style={inputStyle} value={this.props.query} onChange={this.changeHandler} placeholder={this.props.placeholder}/>
+                <button className="btn waves-effect indigo lighten-2" type="submit" name="action"><i className="material-icons">search</i> </button>
+                
+           </div>
         )
     }
 
@@ -50,30 +63,25 @@ class SearchBar extends Component {
 
         const containerStyle = {
             width: "50%",
+            minWidth: '300px',
             boxShadow: "0px 3px 5px lightgray",
             position: "relative",
-            top: "15vh",
+            top: "5vh",
             borderRadius: "3px",
             padding: "5px",
             backgroundColor: 'white'
             
         }
 
-        const rowStyle = {
-            marginBottom: "0px"
-        }
+        
     
         return (
            
                 <Row style={containerStyle}>
                     <form className="col s12" onSubmit={(e)=>this.submitHandler(e)}>
-                        <Row style={rowStyle}>
+                        
                             {this.renderInput()}               
                                 {/* <input onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-input"></input> */}
-                                <button className="btn waves-effect indigo lighten-2 right" type="submit" name="action">Submit  
-                                </button>
-                            
-                        </Row>
                     </form>
                 </Row>
             

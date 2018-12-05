@@ -16,6 +16,7 @@ class NavBar extends Component {
             <nav>
                 <div className="nav-wrapper red lighten-2">
                     <a href="/" className="brand-logo">ToolBox</a>
+                    
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                     
                         {this.props.user && <li><a href="/inventory">Stock Check</a></li>}
@@ -26,6 +27,7 @@ class NavBar extends Component {
                         {this.props.user && <li><a className="waves-effect waves-light btn" href="http://localhost:4000/api/logout">Log out</a></li>}
                     </ul>
                 </div>
+
             </nav>
         )
     }
