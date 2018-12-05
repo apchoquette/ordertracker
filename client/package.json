@@ -68,7 +68,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "proxy": "http://localhost:4000",
   "eslintConfig": {
@@ -125,5 +127,11 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@storybook/react": "^4.0.11",
+    "@storybook/addon-actions": "^4.0.11",
+    "@storybook/addon-links": "^4.0.11",
+    "@storybook/addons": "^4.0.11"
   }
 }

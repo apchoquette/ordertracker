@@ -13,7 +13,7 @@ const InventorySearch = (props) => {
     return (
         <div className="container-fluid">
             <BackButton history = {props.history}/>
-            <SearchBar placeholder="Part Number" purpose="CS"/>
+            <SearchBar placeholder="Part Number or Description" purpose="CS"/>
             
             <Results history = {props.history} />
 

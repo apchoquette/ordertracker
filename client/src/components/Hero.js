@@ -29,18 +29,21 @@ const Hero = (props) => {
                     icon="receipt"
                     title="Get Order Updates"
                     history={props.history}
+                    status="disabled"
                 />
                 <FeatureCard 
                     url="/clp"
                     icon="help"
                     title="Get CLP Distribution Status"
                     history={props.history}
+                    status="disabled"
                 />
                 <FeatureCard 
                     url="/lotphotos"
                     icon="camera_alt"
                     title="Request Lot Photos"
                     history={props.history}
+                    status="disabled"
                 />
 
             </div>
@@ -50,6 +53,13 @@ const Hero = (props) => {
                     icon="add_location"
                     title="Locate Material"
                     history={props.history}
+                />
+                <FeatureCard 
+                    url="/quote-search"
+                    icon="attach_money"
+                    title="Create a Quote"
+                    history={props.history}
+                    status="disabled"
                 />
             </div>
         </div>

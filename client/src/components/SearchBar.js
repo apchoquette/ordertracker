@@ -66,8 +66,8 @@ class SearchBar extends Component {
             minWidth: '300px',
             boxShadow: "0px 3px 5px lightgray",
             position: "relative",
-            top: "5vh",
-            borderRadius: "3px",
+            top: "0",
+            borderRadius: "0px 0px 10px 10px",
             padding: "5px",
             backgroundColor: 'white'
             

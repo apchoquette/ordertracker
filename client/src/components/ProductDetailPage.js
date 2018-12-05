@@ -4,6 +4,7 @@ import * as queryActions from '../redux/actions/query';
 import BackButton from './BackButton';
 import Filter from './Filter';
 import Modal from 'react-modal';
+import filterSelector from '../selectors/filterSelector';
 
 
 class ProductDetailPage extends Component {
@@ -23,19 +24,28 @@ class ProductDetailPage extends Component {
             }else {
                 this.props.fetchWHProductDetails(itemCode);
             }
-            console.log('product detail', this.props)
+            
             
             
         }
 
         render(props) {
             const containerStyle = {
+                width: "40%",
+                boxShadow: "1px 3px 5px lightgray",
+                position: 'relative',
+                top: '-20px',
+                borderRadius: "0px 0px 10px 10px",
+                transition: ".2s ease-in"
+            }
+
+            const resultsStyle = {
                 width: "75%",
                 boxShadow: "1px 3px 5px lightgray",
                 position: 'relative',
-                top: '10vh',
-                borderRadius: "3px",
-                backgroundColor: "white",
+                top: '-20px',
+                borderRadius: "3px 3px 10px 10px",
+                backgroundColor: 'white',
                 transition: ".2s ease-in"
             }
 
@@ -50,11 +60,11 @@ class ProductDetailPage extends Component {
                 <div className="container-fluid">
                     
                     <BackButton history={this.props.history} destination='inventory'/>
-                    <div className="row center-align" style={containerStyle}>
+                    <div className="container center-align blue lighten-3" style={containerStyle}>
                         <h3 className="center-align" style={headerStyle}>{this.props.match.params.itemCode}</h3>
                     </div>
                     <Filter />
-                    <div className="row" style={containerStyle}>
+                    <div className="row" style={resultsStyle}>
                         
                         <table className="centered highlight responsive-table">
                             <thead>
@@ -126,7 +136,8 @@ class ProductDetailPage extends Component {
 const mapStateToProps = (state) => {
     
         return {
-            queryResults: state.itemDetails
+            queryResults: filterSelector(state.itemDetails,state.filters.warehouse)
+
         }
     
 }

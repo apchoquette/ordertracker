@@ -9,8 +9,7 @@ export const setFilter = ( filters
 
 export const clearFilter = () => dispatch => {
     const payload = {
-        warehouse: '',
-        showOnlyStockAvailable: false
+        warehouse: ''
     }
     dispatch({ type: 'SET_FILTER', payload})
 }

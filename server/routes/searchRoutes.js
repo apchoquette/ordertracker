@@ -28,11 +28,7 @@ module.exports = (app) => {
                     WHERE ItemCode LIKE ${itemCode} AND
                     LotSerialNo NOT IN ('10','20','30') AND
                     QuantityOnHand-QuantityCommitted > 0`
-            
-    
-            
-            
-            
+
             let request = new Request(query, (err,rowCount,rows) => {
                 if (err) {
                     console.log(err);
@@ -53,9 +49,7 @@ module.exports = (app) => {
                     })  
                     rowsArray.push(rowArray);
                     })
-                        
-                        
-                    
+                   
                     res.send(rowsArray);
     
                 }else {
@@ -113,10 +107,7 @@ module.exports = (app) => {
                 ItemCode NOT LIKE 'CUSTOM%' AND
                 ItemCode NOT LIKE 'MK%' AND
                 ItemCode NOT LIKE 'XX%'`
-
-        
-        
-        
+ 
         let request = new Request(query, (err,rowCount,rows) => {
             if (err) {
                 console.log(err);
@@ -137,16 +128,13 @@ module.exports = (app) => {
                 })  
                 rowsArray.push(rowArray);
                 })
-                    
-                    
-                
+             
                 res.send(rowsArray);
 
             }else {
                 res.send([]);
             }
-            
-                
+              
             });
         connection.execSql(request);
         }
@@ -229,7 +217,7 @@ app.get('/api/query/wh-item/:itemCode', (req,res) => {
     const executeSpecificWHItemStatement = (itemCode) => {
 
         const query = 
-        `select PRODUCT, BINLABEL, EXTENDED, QUANTITY, PACKSIZE, FROM_BIN, USER_ID
+        `select PRODUCT, BINLABEL, EXTENDED, QUANTITY, PACKSIZE, FROM_BIN, USER_ID, LOCATION
                 FROM BINLOCAT
                 WHERE PRODUCT LIKE ${itemCode} AND
                 BINLABEL NOT LIKE '#%'

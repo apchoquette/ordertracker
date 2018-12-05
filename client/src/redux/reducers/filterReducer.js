@@ -1,4 +1,4 @@
-export default (state={},action) => {
+export default (state={warehouse: 'PAC'},action) => {
     switch(action.type) {
         case 'SET_FILTER':
             
