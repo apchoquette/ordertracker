@@ -7,15 +7,19 @@ import SearchBar from './SearchBar';
 
 const InventorySearch = (props) => {
 
-    
-
     return (
         <div className="container-fluid">
-            <BackButton history = {props.history}/>
-            <SearchBar placeholder="Part Number or Description" purpose="CS" relatedTo="product"/>
-            
-            <Results history = {props.history} />
-
+            <BackButton 
+                history = {props.history}
+            />
+            <SearchBar 
+                placeholder="Part Number or Description" 
+                purpose="CS" 
+                relatedTo="product"
+            />
+            <Results 
+                history={props.history} 
+            />
         </div>
     )
 }

@@ -31,7 +31,6 @@ class OrderProgress extends Component {
         }
     }
     
-
     render() {
 
         const progressBarStyle = this.getProgressBarStyle();
@@ -116,7 +115,6 @@ class OrderProgress extends Component {
                     <div className="determinate" style={progressBarStyle}></div>
                 </div>
                 <div className="row valign-wrapper">
-
                     {this.state.type === 'regular' 
                         ? stagesReg.map((stage,i)=> {
                             return (
@@ -130,9 +128,7 @@ class OrderProgress extends Component {
                                     {stage.stage}
                                 </div>
                             )})
-                        }
-                    
-                    
+                    }
                 </div>
             </div>
         )

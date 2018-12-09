@@ -22,9 +22,7 @@ const Results = (props) => {
     }
 
     const renderTableHeading = (props) => {
-        return(
-             
-            
+        return( 
             <thead>
                 {props.queryResults.length>0 
                 ? 
@@ -36,8 +34,9 @@ const Results = (props) => {
                         <th>Price (Retail)</th>
                         <th>Status East</th>
                         <th>Status West</th>
-                            </tr> 
-                            : <tr />
+                    </tr> 
+                : 
+                <tr />
 
                 }
                 

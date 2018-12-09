@@ -58,7 +58,7 @@ class App extends Component {
                 <Route path="/locate" 
                     render={() => this.props.user===null 
                         ? <Redirect to="/login" /> 
-                        : <Route path="/inventory/:itemCode" component={WHSearch} exact />} 
+                        : <Route path="/locate" component={WHSearch} exact />} 
                 />
             </div>
           </BrowserRouter>

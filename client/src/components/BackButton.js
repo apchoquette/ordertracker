@@ -9,7 +9,7 @@ const BackButton = ({history,destination}) => {
     }
     return (
         <a style={backBtnStyle} className="waves-effect blue btn" onClick={()=>history.goBack()}>
-        <i className="material-icons">arrow_back</i>
+            <i className="material-icons">arrow_back</i>
         </a>
     )
 }

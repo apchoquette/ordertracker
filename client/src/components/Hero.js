@@ -14,7 +14,6 @@ const Hero = (props) => {
         height: "300px"
     }
 
-    
     return (
         <div className="container" style={containerStyle} >
             <div className="row" style={rowStyle}>
@@ -29,7 +28,6 @@ const Hero = (props) => {
                     icon="receipt"
                     title="Get Order Updates"
                     history={props.history}
-                    
                 />
                 <FeatureCard 
                     url="/clp"
@@ -45,7 +43,6 @@ const Hero = (props) => {
                     history={props.history}
                     status="disabled"
                 />
-
             </div>
             <div className="row" style={rowStyle}>
                 <FeatureCard 

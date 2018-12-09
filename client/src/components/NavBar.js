@@ -9,11 +9,7 @@ class NavBar extends Component {
         }
     }
 
-    
-
     render() {
-
-
         const navBarStyle = {
             zIndex: '1000'
         }
@@ -32,7 +28,6 @@ class NavBar extends Component {
                         {this.props.user && <li><a className="waves-effect waves-light btn" href="http://localhost:4000/api/logout">Log out</a></li>}
                     </ul>
                 </div>
-
             </nav>
         )
     }

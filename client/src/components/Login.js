@@ -54,15 +54,12 @@ class Login extends Component {
                         <input type="password" onChange={(e) => this.setState({password: e.target.value})} value={this.state.password} name="password"/>
                     </div>
                     <div className="row center-align">
-                        <button className="btn waves-effect waves-light" type="submit" name="action">Log In
-                            
-                        </button>
+                        <button className="btn waves-effect waves-light" type="submit" name="action">Log In</button>
                     </div>
                 </form>
             </div>
         )
     }
-
 }
 
 const mapStateToProps = state => {

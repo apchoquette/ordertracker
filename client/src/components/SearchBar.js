@@ -16,17 +16,8 @@ class SearchBar extends Component {
         this.changeHandler = this.changeHandler.bind(this)
     }
 
-    componentWillMount(){
-        
-    }
-
-
     changeHandler(e) {
-        
-            this.setState({query: '%25'+e.target.value+'%25'});
-        
-        
-        
+            this.setState({query: '%25'+e.target.value+'%25'});  
     }
 
     submitHandler(e){
@@ -36,12 +27,11 @@ class SearchBar extends Component {
         }else if(this.props.relatedTo==='order'){
             this.props.fetchOrderStatus(this.state.query);
         }
-        
-        
-        
+
     }
 
     renderInput(){
+        
         const rowStyle = {
             marginBottom: "0px",
             display: "flex",
@@ -52,7 +42,6 @@ class SearchBar extends Component {
             padding: "0px"
         }
 
-        
         return (
 
             <div className="row" style={rowStyle}>
@@ -65,9 +54,6 @@ class SearchBar extends Component {
 
     render(props){
 
-       
-        
-
         const containerStyle = {
             width: "50%",
             minWidth: '300px',
@@ -78,13 +64,9 @@ class SearchBar extends Component {
             padding: "5px",
             backgroundColor: 'white',
             zIndex: '1'
-            
         }
 
-        
-    
         return (
-           
                 <Row style={containerStyle}>
                     <form className="col s12" onSubmit={(e)=>this.submitHandler(e)}>
                         
@@ -92,7 +74,6 @@ class SearchBar extends Component {
                                 {/* <input onChange={(e)=>this.changeHandler(e)} value={this.state.query} placeholder="Enter Item Code or Description" id="textarea1" className="materialize-input"></input> */}
                     </form>
                 </Row>
-            
         )
     }
 }
@@ -102,7 +83,6 @@ const mapStateToProps = (state) => {
     return {
         queryResults: state.queryResults
     }
-    
 }
 
 export default connect(mapStateToProps,queryActions)(SearchBar);

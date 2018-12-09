@@ -8,8 +8,7 @@ class Filter extends Component{
         super();
         this.state = {
             selectedPAC: ''
-        }
-        
+        }  
     }
 
     componentWillMount(){
@@ -17,21 +16,12 @@ class Filter extends Component{
     }
 
     handleWHChange()  {
-        
-            
-            
-            if(this.props.filters.warehouse==='BRI'){
-                this.props.setFilter({warehouse: 'PAC'})
+        if(this.props.filters.warehouse==='BRI'){
+            this.props.setFilter({warehouse: 'PAC'})
 
-            }else if(this.props.filters.warehouse === 'PAC'){
-                this.props.setFilter({warehouse: 'BRI'})
-            }
-       
-        
-    }
-
-    handleSQFTChange() {
-
+        }else if(this.props.filters.warehouse === 'PAC'){
+            this.props.setFilter({warehouse: 'BRI'})
+        } 
     }
 
     render(){
@@ -45,10 +35,8 @@ class Filter extends Component{
             padding: "5px",
             backgroundColor: 'white',
             minWidth: '250px'
-            
         }
        
-
         const divLabelStyle = {
             position: "absolute",
             top: "10px",
@@ -68,16 +56,16 @@ class Filter extends Component{
                     <div className="switch center-align">
                     
                         <label style={toggleStyle}>
-                        PAC
-                        <input type="checkbox" onChange={() =>this.handleWHChange()}/>
-                        <span className="lever"></span>
-                        BRI
+                            PAC
+                            <input type="checkbox" onChange={() =>this.handleWHChange()}/>
+                            <span className="lever"></span>
+                            BRI
                         </label>
                         <label style={toggleStyle}>
-                        SqFt
-                        <input disabled type="checkbox" onChange={() =>this.handleSQFTChange()}/>
-                        <span className="lever"></span>
-                        Pc
+                            SqFt
+                            <input disabled type="checkbox" onChange={() =>this.handleSQFTChange()}/>
+                            <span className="lever"></span>
+                            Pc
                         </label>
                     </div>
                  </div>
