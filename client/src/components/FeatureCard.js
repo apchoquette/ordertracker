@@ -8,11 +8,6 @@ const FeatureCard = ({url,icon,title,history,status}) => {
         marginTop: "20px"
     }
 
-    const cardStyleInactive = {
-        height: "100%",
-        cursor: "not-allowed",
-        fontColor: "lightgray"
-    }
 
     const iconStyle = {
         fontSize: "100px"

@@ -1,5 +1,4 @@
 import React from 'react';
-import Filter from './Filter';
 
 
 import BackButton from './BackButton';

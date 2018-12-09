@@ -24,18 +24,42 @@ class App extends Component {
         <div className="container-fluid grey lighten-3" style={mainContainerStyle}>
           <BrowserRouter>
             <div className="container-fluid grey lighten-3">
-                <Route path='/' exact 
-                    render={() => this.props.user ? 
-                    <Redirect to="/"/>
-                    : <Login />} />
                 <NavBar />
-                <Route path="/login" component={Login} />
-                <Route path="/" exact component={Hero} />
-                <Route path="/inventory" component={InventorySearch} exact/>
-                <Route path="/ordertracker" component={OrderTracker} />
-                <Route path="/inventory/:itemCode" component={ProductDetailPage} exact/>
-                <Route path="/inventory-wh/:itemCode" component={ProductDetailPage} exact/>
-                <Route path="/locate" component={WHSearch} />
+                <Route path='/' exact 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" />
+                        : <Route path="/" exact component={Hero} />} 
+                />
+                <Route path="/login" 
+                    render={() => this.props.user 
+                        ? <Redirect to="/"/> 
+                        : <Route to="/login" exact component={Login} />}  
+                />
+                <Route path="/inventory" 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/inventory" component={InventorySearch} exact />}
+                />
+                <Route path="/ordertracker" 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/ordertracker" component={OrderTracker} exact />}  
+                />
+                <Route path="/inventory/:itemCode" 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/inventory/:itemCode" component={ProductDetailPage} exact />} 
+                />
+                <Route path="/inventory-wh/:itemCode" 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/inventory-wh/:itemCode" component={ProductDetailPage} exact />} 
+                />
+                <Route path="/locate" 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/inventory/:itemCode" component={WHSearch} exact />} 
+                />
             </div>
           </BrowserRouter>
         </div>

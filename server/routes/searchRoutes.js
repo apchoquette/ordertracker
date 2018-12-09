@@ -1,8 +1,10 @@
+const userLoggedIn = require('../middlewares/userLoggedIn');
+
 module.exports = (app) => {
 
     //Search CI_Item Sage database by itemcode or description -- For use in Results.js component.
 
-    app.get('/api/query/item/:itemCode', (req,res) => {
+    app.get('/api/query/item/:itemCode', userLoggedIn, (req,res) => {
         const Connection = require('tedious').Connection;
         const Request = require('tedious').Request;
         const keys = require('../config/keys');
@@ -62,7 +64,7 @@ module.exports = (app) => {
             }
     })
 
-    app.get('/api/query/:itemCode', (req,res) => {
+    app.get('/api/query/:itemCode', userLoggedIn, (req,res) => {
         const Connection = require('tedious').Connection;
         const Request = require('tedious').Request;
         const keys = require('../config/keys');
@@ -141,7 +143,7 @@ module.exports = (app) => {
 
     //GET ORDER STATUS BY ORDER NUMBER
 
-    app.get('/api/query/orderStatus/:orderNo', (req,res) => {
+    app.get('/api/query/orderStatus/:orderNo', userLoggedIn,  (req,res) => {
         const Connection = require('tedious').Connection;
         const Request = require('tedious').Request;
         const keys = require('../config/keys');
@@ -167,7 +169,7 @@ module.exports = (app) => {
             FROM 
             SO_SalesOrderHeader
             WHERE 
-            SalesOrderNo LIKE ${orderNo}`;
+            SalesOrderNo LIKE '${orderNo}'`;
 
             let request = new Request(query, (err,rowCount,rows) => {
                 if (err) {
@@ -203,7 +205,7 @@ module.exports = (app) => {
     });
 });
 //find bin locations for warehouse inventory checks
-app.get('/api/query/wh-item/:itemCode', (req,res) => {
+app.get('/api/query/wh-item/:itemCode', userLoggedIn,  (req,res) => {
     const Connection = require('tedious').Connection;
     const Request = require('tedious').Request;
     const keys = require('../config/keys');

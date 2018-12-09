@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Input, Button } from 'react-materialize';
+import { Row } from 'react-materialize';
 import * as queryActions from '../redux/actions/query';
 
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 
 import * as filterActions from '../redux/actions/filter';
 
@@ -48,12 +47,7 @@ class Filter extends Component{
             minWidth: '250px'
             
         }
-        const rowStyle = {
-            marginBottom: "0px",
-            display: "flex",
-            alignContent: "center",
-            height: "50px"
-        }
+       
 
         const divLabelStyle = {
             position: "absolute",

@@ -5,7 +5,7 @@ class OrderProgress extends Component {
         super();
         this.state = {
             type: 'special',
-            stage: "Preparing Order"
+            stage: "Order Received"
         }
     }
 
