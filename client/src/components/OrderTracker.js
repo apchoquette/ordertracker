@@ -10,8 +10,9 @@ class OrderTracker extends Component {
         return (
             <div className="container-fluid">
                 <BackButton history={this.props.history} />
-                <OrderProgress />
-                <SearchBar placeholder="Order Number"/>        
+                
+                <SearchBar placeholder="Order Number" relatedTo="order"/>    
+                <OrderProgress />   
     
             </div>
         )

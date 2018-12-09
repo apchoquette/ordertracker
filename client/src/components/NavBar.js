@@ -9,11 +9,16 @@ class NavBar extends Component {
         }
     }
 
-   
+    
 
     render() {
+
+
+        const navBarStyle = {
+            zIndex: '1000'
+        }
         return (
-            <nav>
+            <nav style={navBarStyle}>
                 <div className="nav-wrapper red lighten-2">
                     <a href="/" className="brand-logo">ToolBox</a>
                     

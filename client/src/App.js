@@ -25,7 +25,7 @@ class App extends Component {
           <BrowserRouter>
             <div className="container-fluid grey lighten-3">
                 <Route path='/' exact 
-                    render={() => this.props.user !== null ? 
+                    render={() => this.props.user ? 
                     <Redirect to="/"/>
                     : <Login />} />
                 <NavBar />

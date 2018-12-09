@@ -29,7 +29,7 @@ const Hero = (props) => {
                     icon="receipt"
                     title="Get Order Updates"
                     history={props.history}
-                    status="disabled"
+                    
                 />
                 <FeatureCard 
                     url="/clp"

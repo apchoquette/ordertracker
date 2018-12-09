@@ -10,8 +10,7 @@ class Login extends Component {
             password: ''
         }
     }
-
-
+    
     componentWillMount() {
         this.props.fetchUser();
     }
@@ -23,15 +22,9 @@ class Login extends Component {
                 if(this.props.user){
                     this.props.history.push('/');
                 }
-            })
-            
+            })           
         })
-            
-        
-        
     }
-
-    
 
     render() {
 
@@ -51,7 +44,7 @@ class Login extends Component {
                     <h3>LOG IN</h3>
                 </div>
                 <form className="container" onSubmit={(e)=>this.submitHandler(e)}>
-                {/* <form className="container" action="/api/login" method="POST"> */} 
+                
                     <div className="row">
                         <label>Username</label>
                         <input type="text" onChange={(e) => this.setState({username: e.target.value})} value={this.state.username} name="username"/>

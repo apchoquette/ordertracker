@@ -7,7 +7,7 @@ const WHSearch = (props) => {
     return (
         <div>
             <BackButton history = {props.history}/>
-            <SearchBar placeholder="Part Number or Description" purpose="CS"/>
+            <SearchBar placeholder="Part Number or Description" purpose="CS" relatedTo="product"/>
             <Results history={props.history}/>
         </div>
     )

@@ -159,41 +159,46 @@ module.exports = (app) => {
     
         const executeOrderStatusStatement = (orderNo) => {
             
-            const query = `select SO_SalesOrderHeader.OrderType, 
-            SO_SalesOrderHeader.OrderStatus, 
-            SO_SalesOrderHeader.ShipToAddress, 
-            SO_SalesOrderHeader.ShipVia FROM SO_SalesOrderHeader where OrderNo=${orderNo}`;
-            let request = new Request(query, (err,rowCount) => {
+            const query = `
+            SELECT 
+            SalesOrderNo, OrderDate, OrderStatus, 
+            CancelReasonCode, BillToName, ShipToAddress1, 
+            ShipToAddress2, ShipToCity, ShipToState 
+            FROM 
+            SO_SalesOrderHeader
+            WHERE 
+            SalesOrderNo LIKE ${orderNo}`;
+
+            let request = new Request(query, (err,rowCount,rows) => {
                 if (err) {
                     console.log(err);
-
-                }else if(rowCount < 1){
-                    res.send([0,0,0,0,0])
+                }else {
+                    console.log('rows returned: ', rowCount);  
                 }
-                
-                else {        
-                    console.log(rowCount + ' rows');
+    
+            }).on('doneInProc',(rowCount, more, rows) => {
+                //Once query runs, check if rows are returned and return an object with all data.
+                if(rowCount>0){
+                    let rowsArray = [];
+    
+                    rows.forEach(function(columns) {
+    
+                    let rowArray = new Object();
+                    columns.forEach(function(column){
+                        rowArray[column.metadata.colName] = column.value
+                    })  
+                    rowsArray.push(rowArray);
+                    })
+                 
+                    res.send(rowsArray);
+    
+                }else {
+                    res.send([]);
                 }
-                connection.close();
-
-            });
-            request.on('row', function(columns) {
-
-                let resultsArr = [];
-
-                columns.forEach(function(column) {
-                        resultsArr.push(column.value)
-                })
-
-                res.send(resultsArr);
-                } 
-            );
-        
-                
+                  
+                });
             connection.execSql(request);
-            
-                
-        };   
+            }
     
     });
 });

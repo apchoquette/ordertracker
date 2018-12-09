@@ -22,14 +22,21 @@ class SearchBar extends Component {
 
 
     changeHandler(e) {
-        this.setState({query: '%25'+e.target.value+'%25'});
+        
+            this.setState({query: '%25'+e.target.value+'%25'});
+        
+        
         
     }
 
     submitHandler(e){
         e.preventDefault();
+        if(this.props.relatedTo==='product'){
+            this.props.fetchQuery(this.state.query);
+        }else if(this.props.relatedTo==='order'){
+            this.props.fetchOrderStatus(this.state.query);
+        }
         
-        this.props.fetchQuery(this.state.query);
         
         
     }
@@ -66,10 +73,11 @@ class SearchBar extends Component {
             minWidth: '300px',
             boxShadow: "0px 3px 5px lightgray",
             position: "relative",
-            top: "0",
+            top: "0px",
             borderRadius: "0px 0px 10px 10px",
             padding: "5px",
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            zIndex: '1'
             
         }
 
