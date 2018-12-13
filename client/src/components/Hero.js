@@ -30,27 +30,18 @@ const Hero = (props) => {
                     history={props.history}
                 />
                 <FeatureCard 
-                    url="/clp"
-                    icon="help"
-                    title="Get CLP Distribution Status"
-                    history={props.history}
-                    status="disabled"
-                />
-                <FeatureCard 
                     url="/lotphotos"
                     icon="camera_alt"
                     title="Request Lot Photos"
                     history={props.history}
                     status="disabled"
                 />
+                
+
+                
             </div>
             <div className="row" style={rowStyle}>
-                <FeatureCard 
-                    url="/locate"
-                    icon="add_location"
-                    title="Locate Material"
-                    history={props.history}
-                />
+                
                 <FeatureCard 
                     url="/quote-search"
                     icon="attach_money"
@@ -58,6 +49,21 @@ const Hero = (props) => {
                     history={props.history}
                     status="disabled"
                 />
+
+                <FeatureCard 
+                    url="/clp"
+                    icon="help"
+                    title="Get CLP Distribution Status"
+                    history={props.history}
+                    status="disabled"
+                />
+                <FeatureCard 
+                    url="/locate"
+                    icon="add_location"
+                    title="Locate Material"
+                    history={props.history}
+                />
+                
             </div>
         </div>
     )

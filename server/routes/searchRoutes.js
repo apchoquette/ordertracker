@@ -229,10 +229,7 @@ app.get('/api/query/wh-item/:itemCode', userLoggedIn,  (req,res) => {
                 WHERE PRODUCT LIKE ${itemCode} AND
                 BINLABEL NOT LIKE '#%'
                 ORDER BY BINLABEL`
-        
 
-        
-        
         
         let request = new Request(query, (err,rowCount,rows) => {
             if (err) {
