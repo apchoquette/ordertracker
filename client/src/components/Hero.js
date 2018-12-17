@@ -32,7 +32,7 @@ const Hero = (props) => {
                 <FeatureCard 
                     url="/lotphotos"
                     icon="camera_alt"
-                    title="Request Lot Photos"
+                    title="Your Current Requests"
                     history={props.history}
                     status="disabled"
                 />
