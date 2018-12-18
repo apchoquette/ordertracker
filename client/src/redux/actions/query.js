@@ -29,5 +29,14 @@ export const clearResults = () => dispatch => {
     dispatch( { type: 'CLEAR_RESULTS', payload: []})
 }
 
+export const fetchOrderList = ( partNo ) => async dispatch => {
+    const res = await axios.get(`/api/query/orders-eta/${partNo}`)
+    dispatch( { type: 'FETCH_QUERY', payload: res.data } );
+}
+
+export const fetchOnOrder = ( partNo ) => async dispatch => {
+    const res = await axios.get(`/api/query/orders/${partNo}`)
+    dispatch( { type: 'FETCH_ORDERS', payload: res.data })
+}
 
 

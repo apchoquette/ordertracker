@@ -26,6 +26,9 @@ class SearchBar extends Component {
             this.props.fetchQuery(this.state.query);
         }else if(this.props.relatedTo==='order'){
             this.props.fetchOrderStatus(this.state.query);
+        }else if(this.props.relatedTo==='product-eta'){
+            this.props.fetchOrderList(this.state.query);
+            this.props.fetchOnOrder(this.state.query);
         }
 
     }

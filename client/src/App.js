@@ -9,6 +9,7 @@ import InventorySearch from './components/InventorySearch';
 import OrderTracker from './components/OrderTracker';
 import ProductDetailPage from './components/ProductDetailPage';
 import WHSearch from './components/WHSearch';
+import ETASearch from './components/ETASearch';
 
 class App extends Component {
 
@@ -59,6 +60,11 @@ class App extends Component {
                     render={() => this.props.user===null 
                         ? <Redirect to="/login" /> 
                         : <Route path="/locate" component={WHSearch} exact />} 
+                />
+                <Route path="/eta" 
+                    render={() => this.props.user===null 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/eta" component={ETASearch} exact />} 
                 />
             </div>
           </BrowserRouter>

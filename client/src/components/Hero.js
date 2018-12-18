@@ -51,11 +51,11 @@ const Hero = (props) => {
                 />
 
                 <FeatureCard 
-                    url="/clp"
+                    url="/eta"
                     icon="help"
-                    title="Get CLP Distribution Status"
+                    title="Get ETA"
                     history={props.history}
-                    status="disabled"
+                    
                 />
                 <FeatureCard 
                     url="/locate"
