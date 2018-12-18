@@ -18,6 +18,10 @@ module.exports = app => {
 
     app.get('/api/logout', (req, res) => { 
         req.logout();
+        process.env.NODE_ENV === 'production' 
+        ?
+        res.redirect('/login')
+        :
         res.redirect('http://localhost:3000/login')
     })
     

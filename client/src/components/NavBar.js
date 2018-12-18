@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import * as authActions from '../redux/actions/auth';
 
 class NavBar extends Component {
     constructor(){
@@ -25,7 +26,7 @@ class NavBar extends Component {
                         {this.props.user && <li><a className="disabled" href="/clp">CLP</a></li>}
                         {this.props.user && <li><a href="/lotphotos">Lot Photos</a></li>}
                         <li><a href="/help">Help</a></li>
-                        {this.props.user && <li><a className="waves-effect waves-light btn" href="http://localhost:4000/api/logout">Log out</a></li>}
+                        {this.props.user && <li><a className="waves-effect waves-light btn" href={process.env.NODE_ENV === 'production' ? "/api/logout" : "http://localhost:4000/api/logout"}>Log out</a></li>}
                     </ul>
                 </div>
             </nav>
@@ -39,4 +40,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps,authActions)(NavBar);
