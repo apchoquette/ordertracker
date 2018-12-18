@@ -45,6 +45,17 @@ class ProductDetailPage extends Component {
             transition: ".2s ease-in"
         }
 
+        const warningStyle = {
+            width: "75%",
+            height: "100px",
+            boxShadow: "1px 3px 5px lightgray",
+            position: 'relative',
+            top: '-20px',
+            borderRadius: "3px 3px 10px 10px",
+            backgroundColor: 'white',
+            transition: ".2s ease-in"
+        }
+
         const headerStyle = {
             fontSize: '4vw'
         }
@@ -61,6 +72,8 @@ class ProductDetailPage extends Component {
                     <h3 className="center-align" style={headerStyle}>{this.props.match.params.itemCode}</h3>
                 </div>
                 <Filter />
+
+                {this.props.queryResults.length > 0 ?
                 <div className="row" style={resultsStyle}>
                     <table className="centered highlight responsive-table">
                         <thead>
@@ -90,7 +103,8 @@ class ProductDetailPage extends Component {
                     
                         </thead>
                         <tbody>
-                            {this.props.history.location.pathname.match(/^\/inventory\/.*/) && this.props.queryResults.map(({WarehouseCode, LotSerialNo, StockAvailable } ,index)=> { return(
+                            {this.props.history.location.pathname.match(/^\/inventory\/.*/) 
+                            && this.props.queryResults.map(({WarehouseCode, LotSerialNo, StockAvailable } ,index)=> { return(
                                 <tr key={index}>
                                     <td>{WarehouseCode}</td>
                                     <td>{LotSerialNo}</td>
@@ -98,7 +112,8 @@ class ProductDetailPage extends Component {
                                     <td><a style={buttonStyle} className="orange-effect deep-orange darken-1 btn-large">Hold</a><a className="waves-effect waves-light btn-large"><i className="material-icons">camera_alt</i></a></td>
                                 </tr>)
                             })}
-                            {this.props.history.location.pathname.match(/^\/inventory-wh\/.*/) && this.props.queryResults.map(({ BINLABEL, EXTENDED, QUANTITY, PACKSIZE, USER_ID, FROM_BIN  } ,index)=> { return(
+                            {this.props.history.location.pathname.match(/^\/inventory-wh\/.*/) 
+                            && this.props.queryResults.map(({ BINLABEL, EXTENDED, QUANTITY, PACKSIZE, USER_ID, FROM_BIN  } ,index)=> { return(
                                 <tr key={index}>
                                     <td>{BINLABEL}</td>
                                     <td>{EXTENDED.split('|')[1]}</td>
@@ -111,6 +126,10 @@ class ProductDetailPage extends Component {
                         </tbody>
                     </table>
                 </div>
+                : <div className="container" style={warningStyle}>
+                    <h3 className="center-align">No Material Available in {this.props.currentFilter}</h3>
+                    <h6 className="center-align">Please select a different warehouse.</h6>
+                    </div>}
                 <Modal 
                 />
                 <Modal 
@@ -122,7 +141,8 @@ class ProductDetailPage extends Component {
 
 const mapStateToProps = (state) => {
         return {
-            queryResults: filterSelector(state.itemDetails,state.filters.warehouse)
+            queryResults: filterSelector(state.itemDetails,state.filters.warehouse),
+            currentFilter: state.filters.warehouse
         }
 }
         

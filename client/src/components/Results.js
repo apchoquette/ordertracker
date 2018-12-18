@@ -1,27 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as queryActions from '../redux/actions/query';
 
-const Results = (props) => {
-    const containerStyle = {
-        width: "75%",
-        boxShadow: "1px 3px 5px lightgray",
-        position: 'relative',
-        top: '5vh',
-        borderRadius: "3px",
-        backgroundColor: "white",
-        transition: ".2s ease-in"
-        
+class Results extends Component {
+
+    componentWillMount(){
+        this.props.clearResults();
     }
 
-    const containerStyleHidden = {
-        hidden: "true"
-    }
-
-    const rowStyle = {
-        cursor: "pointer"
-    }
-
-    const renderTableHeading = (props) => {
+    renderTableHeading(props){
         return( 
             <thead>
                 {props.queryResults.length>0 
@@ -44,35 +31,61 @@ const Results = (props) => {
         )
         
     }
-    return(
-        <div className="row" style={!props.queryResults[0] && props.queryResults[0] !== 0 ? containerStyleHidden : containerStyle}>
+
+    render(props){
+        const containerStyle = {
+            width: "75%",
+            boxShadow: "1px 3px 5px lightgray",
+            position: 'relative',
+            top: '5vh',
+            borderRadius: "3px",
+            backgroundColor: "white",
+            transition: ".2s ease-in"
             
-            <table className="centered highlight responsive-table">
-                {renderTableHeading(props)}
-                <tbody>
-                    
-                        {props.queryResults.map(({ItemCode, ItemcodeDesc, TotalQuantityOnHand, UDF_SQFT_STANDARD_PRICE, UDF_SQFT_RETAIL_PRICE,UDF_STATUSBRI,UDF_STATUSPAC} ,index)=> { return(
-                            <tr style = {rowStyle} key={index} onClick={props.history.location.pathname.match(/^\/locate.*/) ? ()=>props.history.push(`/inventory-wh/${ItemCode}`) : ()=>props.history.push(`/inventory/${ItemCode}`)}>
-                                <td>{ItemCode}</td>
-                                <td>{ItemcodeDesc}</td>
-                                <td>{TotalQuantityOnHand}</td>
-                                <td>{UDF_SQFT_STANDARD_PRICE && `$${UDF_SQFT_STANDARD_PRICE.toFixed(2)}`}</td>
-                                <td>{UDF_SQFT_RETAIL_PRICE && `$${UDF_SQFT_RETAIL_PRICE.toFixed(2)}`}</td>
-                                <td>{UDF_STATUSBRI}</td>
-                                <td>{UDF_STATUSPAC}</td>
-
-                            </tr>)
-
-                        })}
+        }
     
-                </tbody>
+        const containerStyleHidden = {
+            hidden: "true"
+        }
+    
+        const rowStyle = {
+            cursor: "pointer"
+        }
+        return(
+            <div className="row" style={!this.props.queryResults[0] && this.props.queryResults[0] !== 0 ? containerStyleHidden : containerStyle}>
+                
+                <table className="centered highlight responsive-table">
+                    {this.renderTableHeading(this.props)}
+                    <tbody>
+                        
+                            {this.props.queryResults.map(({ItemCode, ItemcodeDesc, TotalQuantityOnHand, UDF_SQFT_STANDARD_PRICE, UDF_SQFT_RETAIL_PRICE,UDF_STATUSBRI,UDF_STATUSPAC} ,index)=> { return(
+                                <tr style = {rowStyle} key={index} onClick={this.props.history.location.pathname.match(/^\/locate.*/) ? ()=>this.props.history.push(`/inventory-wh/${ItemCode}`) : ()=>this.props.history.push(`/inventory/${ItemCode}`)}>
+                                    <td>{ItemCode}</td>
+                                    <td>{ItemcodeDesc}</td>
+                                    <td>{TotalQuantityOnHand}</td>
+                                    <td>{UDF_SQFT_STANDARD_PRICE && `$${UDF_SQFT_STANDARD_PRICE.toFixed(2)}`}</td>
+                                    <td>{UDF_SQFT_RETAIL_PRICE && `$${UDF_SQFT_RETAIL_PRICE.toFixed(2)}`}</td>
+                                    <td>{UDF_STATUSBRI}</td>
+                                    <td>{UDF_STATUSPAC}</td>
+    
+                                </tr>)
+    
+                            })}
+        
+                    </tbody>
+    
+                </table>
+                 
+               
+            </div>
+        )
+    }
 
-            </table>
-             
-           
-        </div>
-    )
-}
+    }
+    
+
+    
+    
 
 const mapStateToProps = (state) => {
     return {
@@ -80,4 +93,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps,queryActions)(Results);

@@ -20,6 +20,7 @@ mongoose.connect(keys.authDB.mongoURI,{
 
 
 require('./models/User');
+require('./models/Request');
 require('./services/passport');
 
 

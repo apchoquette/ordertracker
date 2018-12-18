@@ -25,5 +25,9 @@ export const fetchWHProductDetails = ( params ) => async dispatch => {
     dispatch( { type: 'FETCH_WH_DETAIL_QUERY', payload: res.data } )
 }
 
+export const clearResults = () => dispatch => {
+    dispatch( { type: 'CLEAR_RESULTS', payload: []})
+}
+
 
 

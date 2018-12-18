@@ -6,7 +6,7 @@ import Results from './Results';
 import SearchBar from './SearchBar';
 
 const InventorySearch = (props) => {
-
+    console.log(props)
     return (
         <div className="container-fluid">
             <BackButton 
