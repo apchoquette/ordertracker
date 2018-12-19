@@ -9,7 +9,7 @@
     "start": "cd server && node server.js",
     "server": "cd server && npm run start",
     "client": "cd client && npm run start",
-    "heroku-postbuild": "cd server && npm install && node server.js && cd client && npm install && npm run build"
+    "heroku-postbuild": "cd server && cd client && npm install && npm run build"
   },
   "author": "andychoquette",
   "license": "ISC",
