@@ -14,7 +14,7 @@ module.exports = {
         userName: process.env.SAGE_SERVER_USERNAME,
         password: process.env.SAGE_SERVER_PASSWORD,
         options: {
-            database: WMS_SERVER_DATABASE,
+            database: process.env.WMS_SERVER_DATABASE,
             rowCollectionOnDone: true
         }
     },
