@@ -43,6 +43,10 @@ const PORT = process.env.PORT || 4000;
 require('./routes/searchRoutes')(app);
 require('./routes/authRoutes')(app);
 
+app.listen(PORT, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
+
 if (process.env.NODE_ENV === 'production') {
     //express will serve up production assets
     app.use(express.static('client/build'))
@@ -54,10 +58,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 }
-
-app.get('/', (req,res) => {
-    res.send({"server status":"up and running!!"})
-})
 
 
 
