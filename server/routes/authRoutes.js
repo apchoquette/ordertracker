@@ -1,11 +1,13 @@
 const passport = require('passport');
 
 module.exports = app => {
+
+
     
     app.post('/api/login', 
-        passport.authenticate('local', { failureRedirect: 'http://localhost:3000/login' }),
+        passport.authenticate('local', { failureRedirect: process.env.NODE_ENV === 'production' ? '/login' : 'http://localhost:3000/login' }),
         (req, res) => {
-            res.redirect('http://localhost:3000/');
+            res.redirect(process.env.NODE_ENV === 'production' ? '/login' : 'http://localhost:3000/login');
     });
 
     app.get('/api/currentuser', (req,res) => {
@@ -13,7 +15,7 @@ module.exports = app => {
     })
 
     app.get('/api/login', (req,res) => {
-        res.redirect('/');
+        res.redirect(process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:3000/');
     })
 
     app.get('/api/logout', (req, res) => { 
