@@ -38,7 +38,7 @@ app.use( passport.session());
 
 app.use(bodyParser.json());
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 require('./routes/searchRoutes')(app);
 require('./routes/authRoutes')(app);
