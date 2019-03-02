@@ -4,9 +4,9 @@ import * as queryActions from '../redux/actions/query';
 
 class Results extends Component {
 
-    componentWillMount(){
-        this.props.clearResults();
-    }
+    // componentWillMount(){
+    //     this.props.clearResults();
+    // }
 
     renderTableHeading(props){
         return( 
@@ -19,6 +19,8 @@ class Results extends Component {
                         <th>Quantity Available</th>
                         <th>Price (Wholesale)</th>
                         <th>Price (Retail)</th>
+                        <th>UOM</th>
+                        <th>#/Box</th>
                         <th>Status East</th>
                         <th>Status West</th>
                     </tr> 
@@ -58,13 +60,15 @@ class Results extends Component {
                     {this.renderTableHeading(this.props)}
                     <tbody>
                         
-                            {this.props.queryResults.map(({ItemCode, ItemcodeDesc, TotalQuantityOnHand, UDF_SQFT_STANDARD_PRICE, UDF_SQFT_RETAIL_PRICE,UDF_STATUSBRI,UDF_STATUSPAC} ,index)=> { return(
+                            {this.props.queryResults.map(({ItemCode, UDF_FULL_DESC, TotalQuantityOnHand, UDF_SQFT_STANDARD_PRICE,SalesUnitOfMeasure,UDF_CASEPACK, UDF_SQFT_RETAIL_PRICE,UDF_STATUSBRI,UDF_STATUSPAC} ,index)=> { return(
                                 <tr style = {rowStyle} key={index} onClick={this.props.history.location.pathname.match(/^\/locate.*/) ? ()=>this.props.history.push(`/inventory-wh/${ItemCode}`) : ()=>this.props.history.push(`/inventory/${ItemCode}`)}>
                                     <td>{ItemCode}</td>
-                                    <td>{ItemcodeDesc}</td>
+                                    <td>{UDF_FULL_DESC}</td>
                                     <td>{TotalQuantityOnHand}</td>
                                     <td>{UDF_SQFT_STANDARD_PRICE && `$${UDF_SQFT_STANDARD_PRICE.toFixed(2)}`}</td>
                                     <td>{UDF_SQFT_RETAIL_PRICE && `$${UDF_SQFT_RETAIL_PRICE.toFixed(2)}`}</td>
+                                    <td>{SalesUnitOfMeasure}</td>
+                                    <td>{UDF_CASEPACK}</td>
                                     <td>{UDF_STATUSBRI}</td>
                                     <td>{UDF_STATUSPAC}</td>
     

@@ -72,6 +72,7 @@ class ProductDetailPage extends Component {
                     <h3 className="center-align" style={headerStyle}>{this.props.match.params.itemCode}</h3>
                 </div>
                 <Filter />
+                
 
                 {this.props.queryResults.length > 0 ?
                 <div className="row" style={resultsStyle}>
@@ -109,7 +110,7 @@ class ProductDetailPage extends Component {
                                     <td>{WarehouseCode}</td>
                                     <td>{LotSerialNo}</td>
                                     <td>{StockAvailable}</td>
-                                    <td><a style={buttonStyle} className="orange-effect deep-orange darken-1 btn-large">Hold</a><a className="waves-effect waves-light btn-large"><i className="material-icons">camera_alt</i></a></td>
+                                    <td><a style={buttonStyle} className="orange-effect deep-orange darken-1 btn-large">Add to Order</a><a className="waves-effect waves-light btn-large"><i className="material-icons">camera_alt</i></a></td>
                                 </tr>)
                             })}
                             {this.props.history.location.pathname.match(/^\/inventory-wh\/.*/) 

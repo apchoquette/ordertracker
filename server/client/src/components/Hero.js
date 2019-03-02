@@ -53,7 +53,7 @@ const Hero = (props) => {
                 <FeatureCard 
                     url="/eta"
                     icon="help"
-                    title="Get ETA"
+                    title="Procurement Requests"
                     history={props.history}
                     
                 />

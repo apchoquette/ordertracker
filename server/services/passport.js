@@ -42,7 +42,7 @@ passport.use(new LocalStrategy(
             console.log('no user found') 
             return done(null, false); }
         
-        
+        console.log('User found: ',user)
         return done(null, user);
       });
     }

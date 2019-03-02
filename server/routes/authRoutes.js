@@ -7,7 +7,7 @@ module.exports = app => {
     app.post('/api/login', 
         passport.authenticate('local', { failureRedirect: process.env.NODE_ENV === 'production' ? '/login' : 'http://localhost:3000/login' }),
         (req, res) => {
-            res.redirect(process.env.NODE_ENV === 'production' ? '/login' : 'http://localhost:3000/login');
+            res.redirect(process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:3000/');
     });
 
     app.get('/api/currentuser', (req,res) => {

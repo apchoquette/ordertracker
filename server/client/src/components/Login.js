@@ -7,7 +7,8 @@ class Login extends Component {
         super();
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            loggingIn: false
         }
     }
     
@@ -17,13 +18,18 @@ class Login extends Component {
 
     async submitHandler(e) {
         e.preventDefault();
+        console.log('Current Props:', this.props)
+        console.log('Logging in:',this.props.user)
         await this.props.logIn(this.state.username,this.state.password).then(()=> {
+            
             this.props.fetchUser().then(()=>{
+                console.log('fetched user:',this.props.user)
                 if(this.props.user){
                     this.props.history.push('/');
                 }
             })           
         })
+        console.log('Logged in:',this.props.user)
     }
 
     render() {

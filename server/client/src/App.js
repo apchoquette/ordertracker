@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 
+import CurrentOrder from './components/CurrentOrder'
 import Hero from './components/Hero';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
@@ -36,6 +37,11 @@ class App extends Component {
                         ? <Redirect to="/"/> 
                         : <Route to="/login" exact component={Login} />}  
                 />
+                <Route path="/orders" 
+                    render={() => this.props.user===false 
+                        ? <Redirect to="/login" /> 
+                        : <Route path="/orders" component={CurrentOrder} exact />} 
+                />
                 <Route path="/inventory" 
                     render={() => this.props.user===null 
                         ? <Redirect to="/login" /> 
@@ -66,6 +72,7 @@ class App extends Component {
                         ? <Redirect to="/login" /> 
                         : <Route path="/eta" component={ETASearch} exact />} 
                 />
+                
             </div>
           </BrowserRouter>
         </div>

@@ -85,10 +85,12 @@ module.exports = (app) => {
         const query = itemCode.match(/^'%[a-zA-Z]{2}\d{4}/)  
         ? 
         `select CI_Item.ItemCode, 
-                CI_Item.ItemcodeDesc, 
+                CI_Item.UDF_FULL_DESC, 
                 CI_Item.TotalQuantityOnHand, 
                 CI_Item.UDF_SQFT_STANDARD_PRICE,
                 CI_Item.UDF_SQFT_RETAIL_PRICE,
+                CI_Item.SalesUnitOfMeasure,
+                CI_Item.UDF_CASEPACK,
                 CI_Item.UDF_STATUSBRI,
                 CI_ITEM.UDF_STATUSPAC
                 from CI_Item 
@@ -98,14 +100,17 @@ module.exports = (app) => {
                 ItemCode NOT LIKE 'XX%'`
         :
         `select CI_Item.ItemCode, 
-                CI_Item.ItemcodeDesc, 
+                CI_Item.UDF_FULL_DESC, 
                 CI_Item.TotalQuantityOnHand, 
                 CI_Item.UDF_SQFT_STANDARD_PRICE,
                 CI_Item.UDF_SQFT_RETAIL_PRICE,
+                CI_Item.SalesUnitOfMeasure,
+                CI_Item.UDF_CASEPACK,
                 CI_Item.UDF_STATUSBRI,
                 CI_ITEM.UDF_STATUSPAC
                 from CI_Item 
-                WHERE ItemCodeDesc LIKE ${itemCode} AND
+                WHERE (ItemCodeDesc LIKE ${itemCode} OR
+                UDF_COLLECTION LIKE ${itemCode}) AND
                 ItemCode NOT LIKE 'CUSTOM%' AND
                 ItemCode NOT LIKE 'MK%' AND
                 ItemCode NOT LIKE 'XX%'`
@@ -245,10 +250,10 @@ app.get('/api/query/wh-item/:itemCode', userLoggedIn,  (req,res) => {
 
                 rows.forEach(function(columns) {
 
-                let rowArray = new Object();
-                columns.forEach(function(column){
-                    rowArray[column.metadata.colName] = column.value
-                })  
+                    let rowArray = new Object();
+                    columns.forEach(function(column){
+                        rowArray[column.metadata.colName] = column.value
+                    })  
                 rowsArray.push(rowArray);
                 })
                     
